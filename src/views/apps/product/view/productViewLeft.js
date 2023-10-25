@@ -11,7 +11,9 @@ import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
+
 // ** Custom Components
+
 import Image from 'next/image'
 
 import { CldImage } from 'next-cloudinary'
@@ -19,7 +21,6 @@ import { CldImage } from 'next-cloudinary'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import { getInitials } from 'src/@core/utils/get-initials'
 
-// import ProductViewImageUrl from './ProductViewImageUrl'
 import ProductImageUploader from './ProductImageUploader'
 
 const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, imgUrl2, imgUrl3, imgUrl4, videoUrl }) => {
@@ -39,6 +40,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
   const [selectedImgUrl2, setSelectedImgUrl2] = useState(imgUrl2)
   const [selectedImgUrl3, setSelectedImgUrl3] = useState(imgUrl3)
   const [selectedImgUrl4, setSelectedImgUrl4] = useState(imgUrl4)
+
   // const [selectedVideoImgUrl1, setVideoImgUrl1] = useState(imgUrl1)
 
   const [openViewImgDialog, setOpenViewImgDialog] = useState(false)
