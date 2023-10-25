@@ -17,7 +17,6 @@ import productionTaskList from './apps/production/plan/productionTaskList'
 import planHeader from 'src/store/apps/production/plan/planHeader'
 import planDetail from 'src/store/apps/production/plan/planDetail'
 import production from 'src/store/apps/production'
-import calendar from 'src/store/apps/calendar'
 import employee from 'src/store/apps/hrd/employee'
 
 export const store = configureStore({
@@ -39,7 +38,6 @@ export const store = configureStore({
     planHeader,
     planDetail,
     production,
-    calendar,
     employee
   },
   middleware: getDefaultMiddleware =>
