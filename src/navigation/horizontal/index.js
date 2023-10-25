@@ -128,7 +128,6 @@ const navigation = () => {
           icon: 'mdi:google-circles-extended'
         },
         {
-          
           title: 'Cards',
           icon: 'mdi:credit-card-outline',
           children: [
@@ -241,7 +240,7 @@ const navigation = () => {
             {
               title: 'More',
               path: '/components/more'
-            },
+            }
           ]
         }
       ]
@@ -475,95 +474,7 @@ const navigation = () => {
         }
       ]
     },
-    {
-      title: 'Forms & Tables',
-      icon: 'mdi:checkbox-marked-outline',
-      children: [
-        {
-          title: 'Form Elements',
-          icon: 'mdi:form-select',
-          children: [
-            {
-              title: 'Text Field',
-              path: '/forms/form-elements/text-field'
-            },
-            {
-              title: 'Select',
-              path: '/forms/form-elements/select'
-            },
-            {
-              title: 'Checkbox',
-              path: '/forms/form-elements/checkbox'
-            },
-            {
-              title: 'Radio',
-              path: '/forms/form-elements/radio'
-            },
-            {
-              title: 'Custom Inputs',
-              path: '/forms/form-elements/custom-inputs'
-            },
-            {
-              title: 'Textarea',
-              path: '/forms/form-elements/textarea'
-            },
-            {
-              title: 'Autocomplete',
-              path: '/forms/form-elements/autocomplete'
-            },
-            {
-              title: 'Date Pickers',
-              path: '/forms/form-elements/pickers'
-            },
-            {
-              title: 'Switch',
-              path: '/forms/form-elements/switch'
-            },
-            {
-              title: 'File Uploader',
-              path: '/forms/form-elements/file-uploader'
-            },
-            {
-              title: 'Editor',
-              path: '/forms/form-elements/editor'
-            },
-            {
-              title: 'Slider',
-              path: '/forms/form-elements/slider'
-            },
-            {
-              title: 'Input Mask',
-              path: '/forms/form-elements/input-mask'
-            },
-          ]
-        },
-        {
-          icon: 'mdi:cube-outline',
-          title: 'Form Layouts',
-          path: '/forms/form-layouts'
-        },
-        {
-          title: 'Form Validation',
-          path: '/forms/form-validation',
-          icon: 'mdi:checkbox-marked-circle-outline'
-        },
-        {
-          title: 'Form Wizard',
-          path: '/forms/form-wizard',
-          icon: 'mdi:transit-connection-horizontal'
-        },
-        {
-          title: 'Table',
-          icon: 'mdi:grid-large',
-          path: '/tables/mui'
-        },
-        {
-          title: 'Mui DataGrid',
-          icon: 'mdi:grid',
-          path: '/tables/data-grid'
-        }
-      ]
-    },
+
     {
       title: 'Charts',
       icon: 'mdi:chart-donut',
