@@ -47,7 +47,8 @@ export const authOptions = {
       session.user = token
 
       return session
-    }
+    },
+    secret: 'xNNApy3kgL3i50/7BdcH7Yv5kfaMOxWYcLEsNq259s0='
 
     // Other callback functions
   }
