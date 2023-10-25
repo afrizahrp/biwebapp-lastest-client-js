@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model sysUser {
+  user_id      String   @db.Char(10)
+  role         String   @db.VarChar(10)
+  username     String   @id @unique @db.VarChar(50)
+  email        String   @db.VarChar(50)
+  password     String
+  refreshToken String?  @db.VarChar(250)
+  isLoggedIn   Boolean? @default(false)
+  avatar       String?  @db.VarChar(150)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  username      String   @unique
+  role          String?   @default("user")
+  password      String
+  accessToken   String?
+  refreshToken  String?
+  email         String?
+  emailVerified DateTime?
+  isLoggedIn    Boolean?  @default(false)
+  avatar        String?
+}
