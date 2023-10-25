@@ -36,7 +36,6 @@ export const authOptions = {
     })
   ],
 
-  secret: process.env.JWT_SECRET_KEY,
   session: {
     strategy: 'jwt'
   },
@@ -51,7 +50,8 @@ export const authOptions = {
     }
 
     // Other callback functions
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET
 }
 
 // const handler = NextAuth(authOptions);
