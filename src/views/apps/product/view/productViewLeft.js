@@ -150,7 +150,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                             })
                           }
                         >
-                          {getInitials(item_descs.toUpperCase())}
+                          {catalog_no}
                         </CustomAvatar>
                       )}
                       {/* </Box> */}
@@ -191,7 +191,8 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                             })
                           }
                         >
-                          {getInitials(item_descs.toUpperCase())}
+                          {catalog_no}
+                          {/* {getInitials(item_descs.toUpperCase())} */}
                         </CustomAvatar>
                       )}
                     </Grid>
@@ -234,7 +235,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                             })
                           }
                         >
-                          {getInitials(item_descs.toUpperCase())}
+                          {catalog_no}
                         </CustomAvatar>
                       )}
                     </Grid>
@@ -279,7 +280,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                             })
                           }
                         >
-                          {getInitials(item_descs.toUpperCase())}
+                          {catalog_no}
                         </CustomAvatar>
                       )}
                     </Grid>
@@ -316,7 +317,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                             })
                           }
                         >
-                          {getInitials(item_descs.toUpperCase())}
+                          {catalog_no}
                         </CustomAvatar>
                       )}
                     </Grid>

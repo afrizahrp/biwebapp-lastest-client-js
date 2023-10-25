@@ -1,6 +1,7 @@
 // ** React Imports
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 // import
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -72,7 +73,8 @@ const ProductListCard = ({ allProducts, totalProduct }) => {
                 marginTop: '10px',
                 size: 'small',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                width: '180'
               }}
             >
               <StyledLink href={`/apps/product/view/${product.item_cd}`}>
@@ -97,13 +99,12 @@ const ProductListCard = ({ allProducts, totalProduct }) => {
                         skin='light'
                         variant='rounded'
                         color='primary'
-                        sx={{ width: 250, height: 170, fontWeight: 600, fontSize: '1rem' }}
+                        sx={{ width: 280, height: 170, fontWeight: 600, fontSize: '1rem' }}
                       >
-                        {getInitials(product.item_descs.toUpperCase())}
+                        {product.catalog_no}
+                        {/* {getInitials(product.item_descs.toUpperCase())} */}
                       </CustomAvatar>
                     )}
-
-                    {/* <CardMedia component='img' height='200' width='280' image={product.imgUrl1} alt='productImageUrl' /> */}
                   </Box>
 
                   <CardContent
@@ -118,25 +119,23 @@ const ProductListCard = ({ allProducts, totalProduct }) => {
                       fontSize: '0.8rem'
                     }}
                   >
-                    <p>
-                      <Box sx={{ display: 'flex', width: '100%', ml: 2 }}>
-                        <Tooltip title={product.item_descs}>
-                          <Typography variant='subtitle2' sx={{ mr: 2, color: 'text.primary', fontSize: '0.75rem' }}>
-                            {product.item_cd} - {product.catalog_no}
-                          </Typography>
-                        </Tooltip>
-                      </Box>
+                    <Box sx={{ display: 'flex', width: '100%', ml: 2 }}>
+                      <Tooltip title={product.item_descs}>
+                        <Typography variant='subtitle2' sx={{ mr: 2, fontSize: '0.75rem', color: 'text.primary' }}>
+                          {product.item_descs.length > 35
+                            ? `${product.item_descs.substring(0, 35)}...`
+                            : product.item_descs}
+                        </Typography>
+                      </Tooltip>
+                    </Box>
 
-                      <Box sx={{ display: 'flex', width: '100%', ml: 2 }}>
-                        <Tooltip title={product.item_descs}>
-                          <Typography variant='subtitle2' sx={{ mr: 2, fontSize: '0.75rem', color: 'text.primary' }}>
-                            {product.item_descs.length > 20
-                              ? `${product.item_descs.substring(0, 20)}...`
-                              : product.item_descs}
-                          </Typography>
-                        </Tooltip>
-                      </Box>
-                    </p>
+                    <Box sx={{ display: 'flex', width: '100%', ml: 2 }}>
+                      <Tooltip title={product.item_descs}>
+                        <Typography variant='subtitle2' sx={{ mr: 2, color: 'text.primary', fontSize: '0.75rem' }}>
+                          {product.item_cd}-{product.catalog_no}
+                        </Typography>
+                      </Tooltip>
+                    </Box>
                   </CardContent>
                 </CardActionArea>
               </StyledLink>
