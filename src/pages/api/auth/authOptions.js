@@ -50,8 +50,7 @@ export const authOptions = {
     }
 
     // Other callback functions
-  },
-  secret: process.env.NEXTAUTH_SECRET
+  }
 }
 
 // const handler = NextAuth(authOptions);
