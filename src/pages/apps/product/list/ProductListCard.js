@@ -20,6 +20,7 @@ import Typography from '@mui/material/Typography'
 import CustomChip from 'src/@core/components/mui/chip'
 
 import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import { getInitials } from 'src/@core/utils/get-initials'
 import { Paginate } from 'src/utils/Paginate'
@@ -81,7 +82,7 @@ const ProductListCard = ({ allProducts, totalProduct }) => {
                 <CardActionArea>
                   <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     {product.imgUrl1 ? (
-                      <CldImage
+                      <Image
                         src={product.imgUrl1}
                         width={250}
                         height={170}
@@ -122,8 +123,8 @@ const ProductListCard = ({ allProducts, totalProduct }) => {
                     <Box sx={{ display: 'flex', width: '100%', ml: 2 }}>
                       <Tooltip title={product.item_descs}>
                         <Typography variant='subtitle2' sx={{ mr: 2, fontSize: '0.75rem', color: 'text.primary' }}>
-                          {product.item_descs.length > 35
-                            ? `${product.item_descs.substring(0, 35)}...`
+                          {product.item_descs.length > 26
+                            ? `${product.item_descs.substring(0, 26)}...`
                             : product.item_descs}
                         </Typography>
                       </Tooltip>

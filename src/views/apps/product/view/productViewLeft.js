@@ -16,7 +16,7 @@ import CardActions from '@mui/material/CardActions'
 
 import Image from 'next/image'
 
-import { CldImage } from 'next-cloudinary'
+// import { Image } from 'next-cloudinary'
 
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import { getInitials } from 'src/@core/utils/get-initials'
@@ -116,7 +116,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                   <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', alignItems: 'center' }}>
                     <Grid item sm={4} xs={12} sx={{ margin: '0 10px' }}>
                       {imgUrl1 ? (
-                        <CldImage
+                        <Image
                           src={imgUrl1}
                           width={250}
                           height={170}
@@ -158,7 +158,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
 
                     <Grid item sm={4} xs={12} sx={{ margin: '0 10px' }}>
                       {imgUrl2 ? (
-                        <CldImage
+                        <Image
                           src={imgUrl2}
                           width={250}
                           height={170}
@@ -199,7 +199,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
 
                     <Grid item sm={3} xs={12} sx={{ margin: '0 10px' }}>
                       {imgUrl3 ? (
-                        <CldImage
+                        <Image
                           src={imgUrl3}
                           width={250}
                           height={170}
@@ -241,7 +241,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                     </Grid>
                     <Grid item sm={4} xs={12} sx={{ margin: '0 10px' }}>
                       {imgUrl4 ? (
-                        <CldImage
+                        <Image
                           src={imgUrl4}
                           width={250}
                           height={170}
@@ -286,7 +286,7 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
                     </Grid>
                     <Grid item sm={4} xs={12} sx={{ margin: '0 10px' }}>
                       {videoUrl ? (
-                        <CldImage
+                        <Image
                           src={videoUrl}
                           width='100%'
                           height='100%'
