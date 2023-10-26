@@ -94,6 +94,7 @@ const ProductListCard = ({ allProducts, totalProduct }) => {
                           overflow: 'hidden',
                           margin: '0 12px'
                         }}
+                        onContextMenu={e => e.preventDefault()}
                       />
                     ) : (
                       <CustomAvatar
