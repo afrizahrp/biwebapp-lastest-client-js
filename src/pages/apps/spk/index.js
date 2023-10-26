@@ -7,13 +7,13 @@ import NoData from 'src/common/NoData'
 // import SpkListGrid from './list/spkListGrid'
 
 const SpkContainer = () => {
-  const { allSpkHd, searchStatusName, searchTypeName, searchQuery } = useSelector(state => state.spkHeader)
+  const { allSpkHd, searchStatusName, searchTypeName, searchQuery, sort } = useSelector(state => state.spkHeader)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getAllSpkHeader())
-  }, [dispatch, searchStatusName, searchTypeName, searchQuery])
+  }, [dispatch, searchStatusName, searchTypeName, searchQuery, sort])
 
   const totalSpk = allSpkHd.length
 

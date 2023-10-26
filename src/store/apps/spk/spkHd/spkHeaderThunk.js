@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 export const getAllSpkHeaderThunk = async (_, thunkAPI) => {
-  const { searchStatusName, searchTypeName, searchQuery } = thunkAPI.getState().spkHeader
-  let url = `${process.env.NEXT_PUBLIC_API_URL}/icSpkHd?searchStatusName=${searchStatusName}&searchTypeName=${searchTypeName}` //&searchQuery=${searchQuery}`
+  const { searchStatusName, searchTypeName, searchQuery, sort } = thunkAPI.getState().spkHeader
+  let url = `${process.env.NEXT_PUBLIC_API_URL}/icSpkHd?searchStatusName=${searchStatusName}&searchTypeName=${searchTypeName}&sort=${sort}` //&searchQuery=${searchQuery}`
 
   if (searchQuery) {
     url = url + `&searchQuery=${searchQuery}`

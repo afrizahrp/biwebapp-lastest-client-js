@@ -16,7 +16,7 @@ const SearchContainer = () => {
   const allSpkType = useSelector(store => store.spkType.data)
   const allSpkStatus = useSelector(store => store.spkStatus.data)
 
-  const { searchStatusName, searchTypeName, searchQuery } = useSelector(store => store.spkHeader)
+  const { searchStatusName, searchTypeName, searchQuery, sort, sortOptions } = useSelector(store => store.spkHeader)
 
   const dispatch = useDispatch()
 
@@ -78,7 +78,7 @@ const SearchContainer = () => {
                   }}
                 />
               </Grid>
-              <Grid item sm={3} xs={12}>
+              <Grid item sm={2} xs={6}>
                 <FormRowSelectNew
                   id='select-type'
                   label='Pilih Jenis'
@@ -91,7 +91,7 @@ const SearchContainer = () => {
                   list={['Semua Jenis', ...allSpkType.map(spkType => spkType.spk_typeName)]}
                 />
               </Grid>
-              <Grid item sm={3} xs={12}>
+              <Grid item sm={2} xs={6}>
                 <FormRowSelectNew
                   id='select-status'
                   label='Pilih Status'
@@ -104,7 +104,22 @@ const SearchContainer = () => {
                   list={['Semua Status', ...allSpkStatus.map(spkStatus => spkStatus.status_name)]}
                 />
               </Grid>
-              <Grid item xs='auto'>
+              <Grid item sm={2} xs={12}>
+                <FormRowSelectNew
+                  id='select-sort'
+                  label='Urutkan'
+                  labelId='select-sort'
+                  name='sort'
+                  fontSize='0.2rem'
+                  labelText='Urutkan'
+                  handleChange={handleSearch}
+                  value={sort}
+                  list={sortOptions}
+                />
+              </Grid>
+              <Grid container item xs='auto'>
+                {' '}
+                {/* Added container */}
                 <Box sx={{ mt: 1, pt: 1 }}>
                   <Button variant='contained' size='large' onClick={handleSubmit}>
                     Refresh

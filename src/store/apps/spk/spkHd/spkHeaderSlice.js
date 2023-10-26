@@ -7,7 +7,9 @@ const initialFilterState = {
   searchQuery: '',
   search: '',
   searchTypeName: 'Semua Jenis',
-  searchStatusName: 'Semua Status'
+  searchStatusName: 'Semua Status',
+  sort: 'Expected Desc',
+  sortOptions: ['Tgl Spk Asc', 'Tgl Spk Desc', 'Expected Asc', 'Expected Desc']
 }
 const initialState = {
   allSpkHd: [],
@@ -40,6 +42,7 @@ const spkHeaderSlice = createSlice({
     handleChange: (state, { payload: { name, value } }) => {
       state.page = 1
       state[name] = value
+      console.log('state', state[name])
     },
 
     clearFilters: state => {
