@@ -20,7 +20,8 @@ export const authOptions = {
         const res = await fetch(authURL + '/login', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            withCredentials: true
           },
           body: JSON.stringify({
             username,
