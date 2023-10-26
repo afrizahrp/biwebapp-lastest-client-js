@@ -58,7 +58,6 @@ const ProductImageUploader = ({ open, item_cd, catalog_no, item_descs, uom_cd, i
   const [imageUrl, setImageUrl] = useState('')
 
   const [isEdit, setIsEdit] = useState(true)
-  const [editImgUrl, setEditImgUrl] = useState(imgUrl)
   const [files, setFiles] = useState([])
   const [previewUrl, setPreviewUrl] = useState('')
   const [dialogClosed, setDialogClosed] = useState(false)

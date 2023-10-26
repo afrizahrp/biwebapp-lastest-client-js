@@ -5,22 +5,16 @@ import { useState } from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
-import Button from '@mui/material/Button'
 
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
 
 // ** Custom Components
 
 import Image from 'next/image'
 
-// import { Image } from 'next-cloudinary'
-
 import CustomAvatar from 'src/@core/components/mui/avatar'
-import { getInitials } from 'src/@core/utils/get-initials'
-
 import ProductImageUploader from './ProductImageUploader'
 
 const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, imgUrl2, imgUrl3, imgUrl4, videoUrl }) => {
@@ -32,9 +26,6 @@ const ProductViewLeft = ({ item_cd, item_descs, catalog_no, uom_cd, imgUrl1, img
   const [selectedImgUrl, setSelectedImgUrl] = useState('')
   const [selectedImgOpt, setSelectedImgOpt] = useState('')
   const [imgUrlOpt, setImgUrlOpt] = useState('')
-
-  // const [selectedImgOpt, setSelectedImgOpt] = useState('')
-  // const [imgUrlOpt, setImgUrlOpt] = useState('')
 
   const [selectedImgUrl1, setSelectedImgUrl1] = useState(imgUrl1)
   const [selectedImgUrl2, setSelectedImgUrl2] = useState(imgUrl2)
