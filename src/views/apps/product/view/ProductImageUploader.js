@@ -27,9 +27,9 @@ import { useDropzone } from 'react-dropzone'
 
 import Link from 'next/link'
 
-// import Image from 'next/image'
+import Image from 'next/image'
 // import { Image } from 'cloudinary-react'
-import { CldImage } from 'next-cloudinary'
+// import { Image } from 'next-cloudinary'
 
 const Img = styled('img')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -215,7 +215,7 @@ const ProductImageUploader = ({ open, item_cd, catalog_no, item_descs, uom_cd, i
                 <input {...getInputProps()} />
                 {files.length ? (
                   <Box sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                    <CldImage
+                    <Image
                       src={imageUrl}
                       width={580}
                       height={400}
@@ -231,8 +231,8 @@ const ProductImageUploader = ({ open, item_cd, catalog_no, item_descs, uom_cd, i
                   </Box>
                 ) : (
                   <Box sx={{ flexDirection: ['column', 'column', 'row'], alignItems: 'center' }}>
-                    {CldImage ? (
-                      <CldImage
+                    {Image ? (
+                      <Image
                         src={imgUrl}
                         width={580}
                         height={400}
