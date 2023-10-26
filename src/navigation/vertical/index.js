@@ -21,8 +21,10 @@ const navigation = () => {
       ]
     },
     {
-      sectionTitle: 'Apps & Pages'
+      sectionTitle: 'Application'
     },
+    /* add divider here */
+
     {
       title: 'Produk',
       icon: 'mdi:cube-outline',
