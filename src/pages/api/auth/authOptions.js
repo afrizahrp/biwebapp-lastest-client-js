@@ -48,7 +48,7 @@ export const authOptions = {
 
       return session
     },
-    secret: 'xNNApy3kgL3i50/7BdcH7Yv5kfaMOxWYcLEsNq259s0='
+    secret: process.env.NEXTAUTH_SECRET
 
     // Other callback functions
   }
