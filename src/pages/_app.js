@@ -33,9 +33,6 @@ import { SessionProvider } from 'next-auth/react'
 // ** Spinner Import
 import Spinner from 'src/@core/components/spinner'
 
-// ** Contexts
-// import { AuthProvider } from 'src/context/AuthContext'
-
 import { SettingsConsumer, SettingsProvider } from 'src/@core/context/settingsContext'
 
 // ** Styled Components
@@ -59,7 +56,6 @@ import 'src/iconify-bundle/icons-bundle-react'
 // ** Global css styles
 
 import '../../styles/globals.css'
-import AuthProvider from 'src/context/AuthProvider'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -118,7 +114,6 @@ const App = props => {
         </Head>
 
         <SessionProvider session={pageProps.session}>
-          {/* <AuthProvider> */}
           <SettingsProvider {...(setConfig ? { pageSettings: setConfig() } : {})}>
             <SettingsConsumer>
               {({ settings }) => {
@@ -137,7 +132,6 @@ const App = props => {
               }}
             </SettingsConsumer>
           </SettingsProvider>
-          {/* </AuthProvider> */}
         </SessionProvider>
       </CacheProvider>
     </Provider>
