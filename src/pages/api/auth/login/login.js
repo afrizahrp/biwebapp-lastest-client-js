@@ -4,6 +4,8 @@ import * as bcrypt from 'bcrypt'
 import { signJwtAccessToken } from 'src/helpers/jwt'
 
 export async function POST(request) {
+  console.log('request', request)
+
   try {
     const { username, password } = await request.json()
 
