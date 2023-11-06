@@ -63,9 +63,11 @@ export const getAllProduct = createAsyncThunk('products/getAllProduct', async ({
 
       ...(searchQuery || {})
     }).toString()
+
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/icStkmast/?searchCategory=${searchCategory}&searchQuery=${searchQuery}`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/products/?searchCategory=${searchCategory}&searchQuery=${searchQuery}`
     )
+
     return response.data
   } catch (error) {
     console.error(error)
@@ -78,6 +80,7 @@ export const getProductById = createAsyncThunk('products/getProductById', async 
   try {
     const URL = `${process.env.NEXT_PUBLIC_API_URL}/icStkmast/${item_cd}`
     const response = await axios.get(URL)
+
     return response.data
   } catch (error) {
     console.error(error)
@@ -89,6 +92,7 @@ export const editProductImageUrl = createAsyncThunk(
   async ({ item_cd, product }, thunkAPI) => {
     try {
       const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/icStkmast/${item_cd}`, product)
+
       return response.data
     } catch (error) {
       return tuhknAPI.rejectWithValue(error.response.data)

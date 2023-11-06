@@ -15,7 +15,8 @@ const initialState = {
 // ** Fetch Products
 export const getGroupProductList = createAsyncThunk('appGroupProduct/getGroupProductList', async () => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/icStkGroup/`)
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/groupProduct/`)
+
     return response.data.allGroupProduct
   } catch (error) {
     console.error(error)
