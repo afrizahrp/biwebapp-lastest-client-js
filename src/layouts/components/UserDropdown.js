@@ -85,11 +85,11 @@ const UserDropdown = props => {
 
   const handleLogout = async () => {
     try {
-      const logoutURL = process.env.NEXT_PUBLIC_API_URL + '/auth/logout'
-      await fetch(logoutURL, {
-        method: 'PATCH',
-        withCredentials: true
-      })
+      // const logoutURL = process.env.NEXT_PUBLIC_API_URL + '/auth/logout'
+      // await fetch(logoutURL, {
+      //   method: 'PATCH',
+      //   withCredentials: true
+      // })
       signOut({ callbackUrl: '/', redirect: false }).then(() => {
         router.asPath = '/'
       })

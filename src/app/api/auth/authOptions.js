@@ -1,62 +1,81 @@
+import prisma from 'src/prisma/libs/prisma'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import CredentialsProvider from 'next-auth/providers/credentials'
-
-const authURL = process.env.NEXTAUTH_URL
+import bcrypt from 'bcrypt'
 
 export const authOptions = {
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      name: 'Credentials',
       credentials: {
         username: {
           label: 'Username',
-          type: 'text',
-          placeholder: 'John Smith'
+          type: 'username',
+          placeholder: 'username'
         },
-        password: { label: 'Password', type: 'password' }
+        password: {
+          label: 'Password',
+          type: 'password',
+          placeholder: 'Password'
+        }
       },
       async authorize(credentials) {
-        const { username, password } = credentials
+        if (!credentials?.username || !credentials.password) return null
 
-        const res = await fetch(authURL + '/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            withCredentials: true
-          },
-          body: JSON.stringify({
-            username,
-            password
-          })
+        const user = await prisma.user.findUnique({
+          where: { username: credentials.username }
         })
 
-        const user = await res.json()
-        if (res.ok && user) {
-          return user
-        } else return null
+        if (!user) return null
+
+        const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
+
+        if (passwordsMatch) {
+          await prisma.user.update({
+            where: { username: credentials.username },
+            data: {
+              isLoggedIn: true
+            }
+          })
+        }
+
+        return passwordsMatch ? user : null
       }
     })
   ],
-  pages: {
-    signIn: '/auth/login'
-  },
-
   session: {
     strategy: 'jwt'
   },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET
+  },
+
+  debug: process.env.NODE_ENV === 'development',
+
   callbacks: {
+    // Ref: https://authjs.dev/guides/basics/role-based-access-control#persisting-the-role
     async jwt({ token, user }) {
-      return { ...token, ...user }
+      if (user) {
+        token.role = user.role
+        token.username = user.username
+        token.isLoggedIn = user.isLoggedIn
+        token.avatar = user.avatar
+      }
+
+      return token
     },
+
+    // extend session with custom data
     async session({ session, token }) {
-      session.user = token
+      if (session?.user) {
+        session.user.role = token.role
+        session.user.username = String(token.username)
+        session.user.isLoggedIn = token.isLoggedIn
+        session.user.avatar = token.avatar
+      }
 
       return session
-    },
-    secret: process.env.NEXTAUTH_SECRET
-
-    // Other callback functions
+    }
   }
 }
-
-// const handler = NextAuth(authOptions);
-// export { handler as GET, handler as POST };
