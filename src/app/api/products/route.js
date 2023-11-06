@@ -8,7 +8,6 @@ export async function GET(NextRequest) {
   const { searchParams } = new URL(req.url)
 
   const searchCategory = searchParams.get('searchCategory') || 'Semua Kategori'
-  console.log('searchCategory', searchCategory)
 
   const searchQuery = searchParams.get('searchQuery') || ''
 

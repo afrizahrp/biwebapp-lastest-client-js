@@ -20,7 +20,6 @@ const ProductsContainer = () => {
   }, [dispatch, searchCategory, searchQuery])
 
   if (allProducts && allProducts.length > 0) {
-    console.log('allProducts', allProducts)
     const totalProduct = allProducts.length
 
     return (

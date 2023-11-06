@@ -60,7 +60,6 @@ export const getAllProduct = createAsyncThunk('products/getAllProduct', async ({
     const params = new URLSearchParams({
       group_descs: searchCategory || 'Semua Kategori',
       searchQuery: searchQuery || '',
-
       ...(searchQuery || {})
     }).toString()
 
