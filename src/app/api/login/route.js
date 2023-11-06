@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt'
 import { signJwtAccessToken } from 'src/helpers/jwt'
 
 export async function POST(request) {
-  console.log('request', request)
+  console.log('login', request)
 
   try {
     const { username, password } = await request.json()
@@ -13,7 +13,7 @@ export async function POST(request) {
       return NextResponse.json({ message: 'Both fields are required' }, { status: 400 })
     }
 
-    const user = await prisma.User.findUnique({
+    const user = await prisma.user.findUnique({
       where: { username: username.toLowerCase() }
     })
 
@@ -22,7 +22,8 @@ export async function POST(request) {
     }
 
     if (await bcrypt.compare(password, user.password)) {
-      const { password: hashedPassword, ...result } = user
+      const { ...result } = user
+
       const accessToken = signJwtAccessToken(result)
 
       // if (user) {
@@ -36,12 +37,15 @@ export async function POST(request) {
       //   return NextResponse.json({ message: 'Not verified' }, { status: 400 });
       // }
 
+      // return NextResponse.json({ result: { ...result } }, { status: 200 })
+
       return NextResponse.json({ result: { ...result, accessToken } }, { status: 200 })
     } else {
       return NextResponse.json({ message: 'Password incorrect' }, { status: 400 })
     }
   } catch (e) {
     console.error(e)
+
     return NextResponse.json({ message: 'Something went wrong while trying to log in', result: e }, { status: 500 })
   }
 }

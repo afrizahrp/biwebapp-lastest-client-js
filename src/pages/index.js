@@ -7,11 +7,13 @@ const Home = () => {
   const session = useSession()
   const router = useRouter()
 
+  console.log('session', session.status)
+
   useEffect(() => {
-    if (session.status === 'authenticated' && router.route === '/') {
+    if (session?.user && router.route === '/') {
       router.replace('/dashboards/analytics')
     }
-  }, [router.route, session.status])
+  }, [session?.user, router])
 
   return <Spinner sx={{ height: '100%' }} />
 }
