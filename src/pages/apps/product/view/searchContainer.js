@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { handleChange, clearFilters, setSearchQuery, setClearValue } from 'src/store/apps/product'
 
-import { getGroupProductList } from 'src/store/apps/groupProduct'
+import { getGroupProductList } from 'src/store/apps/groupProducts'
 
 import FormRowSelectNew from 'src/utils/FormRowSelectNew'
 import SearchText from '../../../../common/searchText'
 
 const SearchContainer = () => {
   const [localSearch, setLocalSearch] = useState('')
-  const allGroupProduct = useSelector(state => state.groupProduct.data)
+  const allGroupProduct = useSelector(state => state.groupProducts.data)
   const { searchCategory, searchQuery } = useSelector(state => state.product)
   const dispatch = useDispatch()
 
@@ -26,6 +26,7 @@ const SearchContainer = () => {
 
   const debounce = useCallback((fn, delay) => {
     let timeoutId
+
     return (...args) => {
       clearTimeout(timeoutId)
       timeoutId = setTimeout(() => {

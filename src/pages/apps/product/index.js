@@ -18,10 +18,11 @@ const ProductsContainer = () => {
   useEffect(() => {
     dispatch(getAllProduct({ searchCategory, searchQuery }))
   }, [dispatch, searchCategory, searchQuery])
-  console.log('allProducts', allProducts)
-  const totalProduct = allProducts.length
 
   if (allProducts && allProducts.length > 0) {
+    console.log('allProducts', allProducts)
+    const totalProduct = allProducts.length
+
     return (
       <>
         <SearchContainer />

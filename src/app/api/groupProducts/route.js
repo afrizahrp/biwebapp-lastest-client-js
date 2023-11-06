@@ -3,11 +3,11 @@ import prisma from '../../../prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(NextRequest) {
-  const products = await prisma.icStkmast.findMany({
+  const groupProducts = await prisma.icStkGroup.findMany({
     where: {
-      isShowed: true
+      isShow: true
     }
   })
 
-  return NextResponse.json(products)
+  return NextResponse.json(groupProducts)
 }

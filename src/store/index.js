@@ -2,7 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import user from 'src/store/apps/user'
-import groupProduct from 'src/store/apps/groupProduct'
+import groupProducts from 'src/store/apps/groupProducts'
 import product from 'src/store/apps/product'
 import productSpec from 'src/store/apps/productSpec'
 import productImageUrl from 'src/store/apps/productImageUrl'
@@ -22,7 +22,7 @@ import employee from 'src/store/apps/hrd/employee'
 export const store = configureStore({
   reducer: {
     user,
-    groupProduct,
+    groupProducts,
     product,
     productSpec,
     production,
