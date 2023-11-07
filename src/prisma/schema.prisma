@@ -134,3 +134,23 @@ model icStkmastSpec {
   tkdn_value         Decimal?  @default(0) @db.Decimal(9, 2)
   remarks            String?   @default("") @db.VarChar(1000)
 }
+
+model po_supplier {
+  supplier_cd    String    @id @db.Char(30)
+  name           String?   @db.VarChar(150)
+  address1       String?   @db.VarChar(250)
+  address2       String?   @db.VarChar(250)
+  address3       String?   @db.VarChar(250)
+  post_cd        String?   @db.VarChar(10)
+  tel_no         String?   @db.VarChar(50)
+  fax_no         String?   @db.VarChar(50)
+  email          String?   @db.VarChar(50)
+  contact_person String?   @db.VarChar(50)
+  mobile_no      String?   @db.VarChar(50)
+  credit_term    Int?      @db.TinyInt
+  currency_cd    String?   @db.Char(3)
+  createdBy      String?   @db.VarChar(50)
+  createdAt      DateTime? @default(now()) @db.DateTime
+  updatedBy      String?   @db.VarChar(50)
+  updatedAt      DateTime? @default(now()) @db.DateTime
+}
