@@ -149,6 +149,7 @@ model po_supplier {
   mobile_no      String?   @db.VarChar(50)
   credit_term    Int?      @db.TinyInt
   currency_cd    String?   @db.Char(3)
+  remarks        String?   @db.VarChar(250)
   createdBy      String?   @db.VarChar(50)
   createdAt      DateTime? @default(now()) @db.DateTime
   updatedBy      String?   @db.VarChar(50)
