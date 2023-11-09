@@ -7,6 +7,9 @@ const path = require('path')
 const nextConfig = {
   /* config options here */
   reactStrictMode: true,
+  experimental: {
+    appDir: true
+  },
   images: {
     domains: ['res.cloudinary.com']
   }
@@ -16,6 +19,7 @@ module.exports = {
   ...nextConfig,
   trailingSlash: true,
   reactStrictMode: false,
+
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.

@@ -63,9 +63,7 @@ export const getAllProduct = createAsyncThunk('products/getAllProduct', async ({
       ...(searchQuery || {})
     }).toString()
 
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/products/?searchCategory=${searchCategory}&searchQuery=${searchQuery}`
-    )
+    const response = await axios.get(`/api/products/?searchCategory=${searchCategory}&searchQuery=${searchQuery}`)
 
     return response.data
   } catch (error) {

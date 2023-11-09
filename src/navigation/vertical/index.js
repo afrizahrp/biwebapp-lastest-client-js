@@ -23,6 +23,7 @@ const navigation = () => {
     {
       sectionTitle: 'Application'
     },
+
     /* add divider here */
 
     {
@@ -46,6 +47,7 @@ const navigation = () => {
           icon: 'mdi:pencil-outline',
           path: '/apps/production/plan/list/PlanContainer'
         }
+
         // {
         //   title: 'Kalender Produksi',
         //   icon: 'mdi:calendar-check-outline',
