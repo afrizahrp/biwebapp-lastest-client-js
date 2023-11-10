@@ -38,6 +38,7 @@ const columns = [
     renderCell: ({ row }) => {
       let spkDate = moment(row.spk_date)
       spkDate = spkDate.format('DD MMM YYYY')
+
       return (
         <Box sx={{ display: 'flex', alignItems: 'left' }}>
           <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
@@ -114,6 +115,7 @@ const columns = [
     renderCell: ({ row }) => {
       let expectedDate = moment(row.expected_date)
       expectedDate = expectedDate.format('DD MMM YYYY')
+
       return (
         <Typography variant='body2' noWrap sx={{ textTransform: 'capitalize' }}>
           {expectedDate}

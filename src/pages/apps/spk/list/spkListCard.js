@@ -1,6 +1,5 @@
 // ** React Imports
 import { useState } from 'react'
-// import
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
@@ -51,6 +50,7 @@ const SpkListCard = ({ allSpkHd, totalSpk }) => {
   }
 
   const allData = Paginate(allSpkHd, currentPage, pageSize)
+
   return (
     <>
       <Grid container spacing={2}>
