@@ -1,3 +1,6 @@
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+
 const navigation = () => {
   return [
     {
@@ -29,7 +32,7 @@ const navigation = () => {
     {
       title: 'Produk',
       icon: 'mdi:cube-outline',
-      path: '/apps/product' ///list/ProductListGrid',
+      path: '/apps/product'
     },
 
     {

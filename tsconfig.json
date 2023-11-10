@@ -30,7 +30,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/app/api/products/route.js",
-    "src/app/api/groupProducts/route.js"
+    "src/app/api/groupProducts/route.js",
+    "src/pages/components/logo/Logojs"
   ],
   "exclude": [
     "node_modules"

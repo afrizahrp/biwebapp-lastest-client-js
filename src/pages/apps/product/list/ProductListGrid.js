@@ -83,6 +83,7 @@ const columns = [
     renderCell: ({ row }) => {
       const { item_descs, item_cd } = row
       const encodedItemCd = encodeURIComponent(item_cd)
+
       return (
         <Box sx={{ display: 'flex', alignItems: 'left' }}>
           <Typography noWrap variant='body2' sx={{ color: 'blue' }}>
@@ -129,7 +130,7 @@ const columns = [
   }
 ]
 
-const ProductList = () => {
+const ProductListGrid = ({ allProducts, totalProduct }) => {
   // ** State
   const [group_descs, setGroup_descs] = useState('')
   const [value, setValue] = useState('')
@@ -142,11 +143,11 @@ const ProductList = () => {
   const [perPage, setPerPage] = useState(10)
   const [localSearch, setLocalSearch] = useState('')
   const searchTerm = useSelector(state => state.product.params.searchQuery)
-  const allGroupProduct = useSelector(state => state.groupProduct.data)
+
+  // const allGroupProduct = useSelector(state => state.groupProduct.data)
 
   const store = useSelector(state => state.product)
-  const rows = store.data
-
+  const rows = allProducts
   const totalRows = store.totalRows
   const totalPages = store.totalPages
   const isLoading = store.loading
@@ -166,6 +167,7 @@ const ProductList = () => {
     const newPage = params.page + 1 // Karena parameter 'page' dimulai dari 0, tambahkan 1 untuk mendapatkan halaman yang benar
     setPage(newPage)
     setCurrentPage(newPage)
+
     // Jika diperlukan, perbarui nilai currentPage
   }
 
@@ -195,7 +197,7 @@ const ProductList = () => {
 
   return (
     <>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Card sx={{ marginBottom: '10px', marginTop: -5 }}>
           <CardHeader
             title='Search and Filters'
@@ -245,7 +247,7 @@ const ProductList = () => {
             </Grid>
           </CardContent>
         </Card>
-      </Grid>
+      </Grid> */}
       <Grid item xs={12}>
         <Card>
           <DataGrid
@@ -266,4 +268,4 @@ const ProductList = () => {
   )
 }
 
-export default ProductList
+export default ProductListGrid

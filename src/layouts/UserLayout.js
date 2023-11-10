@@ -18,6 +18,7 @@ import HorizontalAppBarContent from './components/horizontal/AppBarContent'
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import Logo from 'src/components/logo/Logo'
 
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
@@ -42,16 +43,32 @@ const UserLayout = ({ children, contentHeightFixed }) => {
     settings.layout = 'vertical'
   }
 
-  const AppBrand = () => {
-    return (
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <img src='/images/am-logo.png' alt='logo' width='70' height='75' align='center' href='/home' />
-        <Typography variant='h8' sx={{ ml: 1.5 }}>
-          Activity Monitoring
-        </Typography>
-      </Box>
-    )
-  }
+  const AppBrand = () => (
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Typography variant='h6' component='h1' alignContent={'center'} sx={{ ml: 4 }}>
+        <span
+          style={{
+            fontStyle: 'italic',
+            fontSize: '1.85rem',
+            fontWeight: '800',
+            color: '#045693'
+          }}
+        >
+          bip
+        </span>{' '}
+        <span
+          style={{
+            // fontWeight: 'bold',
+            fontSize: '1.45rem',
+            color: '#83BB52',
+            fontWeight: '800'
+          }}
+        >
+          MED
+        </span>{' '}
+      </Typography>
+    </Box>
+  )
 
   return (
     <Layout

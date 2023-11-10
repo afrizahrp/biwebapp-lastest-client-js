@@ -19,7 +19,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
-
+import Image from 'next/image'
 import MuiCard from '@mui/material/Card'
 import Icon from 'src/@core/components/icon'
 
@@ -40,7 +40,7 @@ const BoxWrapper = styled(Box)(({ theme }) => ({
 }))
 
 const Card = styled(MuiCard)(({ theme }) => ({
-  [theme.breakpoints.up('sm')]: { width: 450 }
+  [theme.breakpoints.up('sm')]: { width: 300 }
 }))
 
 const schema = yup.object().shape({
@@ -58,6 +58,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false)
   const session = useSession()
   const router = useRouter()
+
   // ** Hooks
   const theme = useTheme()
 
@@ -78,6 +79,7 @@ const LoginPage = () => {
     mode: 'onBlur',
     resolver: yupResolver(schema)
   })
+
   const onSubmit = data => {
     const { username, password } = data
     signIn('credentials', { username, password, redirect: false }).then(res => {
@@ -97,11 +99,23 @@ const LoginPage = () => {
 
   const AppBrand = () => {
     return (
-      <Box
-        sx={{ mb: 0, mt: 0, alignItems: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}
-      >
-        <img src='/images/amlogologin.png' alt='logo' width='180' height='180' align='center' pb='0' />
-      </Box>
+      <>
+        <Image
+          src={'/images/logo-bipmed.png'}
+          width={200}
+          height={110}
+          alt='logo'
+          priority
+          style={{
+            objectFit: 'cover',
+            cursor: 'pointer',
+            overflow: 'hidden',
+            alignContent: 'center',
+            margin: '0 13px'
+          }}
+          onContextMenu={e => e.preventDefault()}
+        />
+      </>
     )
   }
 

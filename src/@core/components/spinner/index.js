@@ -18,7 +18,7 @@ const FallbackSpinner = ({ sx }) => {
         ...sx
       }}
     >
-      {/* <svg width={80} fill='none' height={44} viewBox='0 0 268 150' xmlns='http://www.w3.org/2000/svg'> */}
+      <img src='/images/logo-bipmed.png' alt='logo' width='130' height='94' />
 
       <rect
         rx='25.1443'
