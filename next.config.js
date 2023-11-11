@@ -7,9 +7,6 @@ const path = require('path')
 const nextConfig = {
   /* config options here */
   reactStrictMode: true,
-  experimental: {
-    appDir: true
-  },
   images: {
     domains: ['res.cloudinary.com']
   }

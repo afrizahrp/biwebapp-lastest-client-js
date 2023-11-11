@@ -6,12 +6,12 @@
  */
 const themeConfig = {
   // ** Layout Configs
-  templateName: 'AM' /* App Name */,
+  templateName: 'bipMED' /* App Name */,
   layout: 'vertical' /* vertical | horizontal */,
   mode: 'light' /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
   direction: 'ltr' /* ltr | rtl */,
   skin: 'default' /* default | bordered */,
-  contentWidth: 'boxed' /* full | boxed */,
+  contentWidth: 'full' /* full | boxed */,
   footer: 'hidden' /* fixed | static | hidden */,
   // ** Routing Configs
   routingLoader: true /* true | false */,
@@ -33,7 +33,7 @@ const themeConfig = {
   // ** Other Configs
   responsiveFontSizes: true /* true | false */,
   disableRipple: false /* true | false */,
-  disableCustomizer: true /* true | false */,
+  disableCustomizer: false /* true | false */,
   toastPosition: 'top-right' /* top-left | top-center | top-right | bottom-left | bottom-center | bottom-right */
 }
 
