@@ -18,7 +18,6 @@ import FormHelperText from '@mui/material/FormHelperText'
 import InputAdornment from '@mui/material/InputAdornment'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import MuiCard from '@mui/material/Card'
 import Icon from 'src/@core/components/icon'
@@ -35,12 +34,12 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 const BoxWrapper = styled(Box)(({ theme }) => ({
   width: '80%',
   [theme.breakpoints.down('md')]: {
-    maxWidth: 300
+    maxWidth: 370
   }
 }))
 
 const Card = styled(MuiCard)(({ theme }) => ({
-  [theme.breakpoints.up('sm')]: { width: 300 }
+  [theme.breakpoints.up('sm')]: { width: 375 }
 }))
 
 const schema = yup.object().shape({
@@ -54,9 +53,7 @@ const defaultValues = {
 }
 
 const LoginPage = () => {
-  const [rememberMe, setRememberMe] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
-  const session = useSession()
   const router = useRouter()
 
   // ** Hooks
@@ -110,8 +107,7 @@ const LoginPage = () => {
             objectFit: 'cover',
             cursor: 'pointer',
             overflow: 'hidden',
-            alignContent: 'center',
-            margin: '0 13px'
+            alignContent: 'center'
           }}
           onContextMenu={e => e.preventDefault()}
         />
@@ -127,7 +123,7 @@ const LoginPage = () => {
         <Box
           sx={{
             p: 3,
-            height: '80%',
+            height: '   10%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -213,8 +209,6 @@ const LoginPage = () => {
             </form>
           </BoxWrapper>
         </Box>
-
-        {/* </RightWrapper> */}
       </Card>
     </Box>
   )
