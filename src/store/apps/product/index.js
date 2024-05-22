@@ -13,9 +13,8 @@ const initialState = {
   oneProduct: [],
   allProducts: [],
   catalog_no: '',
-  item_cd: '',
-  item_descs: '',
-  group_descs: '',
+  id: '',
+  descs: '',
   uom_cd: '',
   totalRows: 0,
   totalPages: 1,
@@ -73,9 +72,9 @@ export const getAllProduct = createAsyncThunk('products/getAllProduct', async ({
   }
 })
 
-export const getProductById = createAsyncThunk('products/getProductById', async ({ item_cd }) => {
+export const getProductById = createAsyncThunk('products/getProductById', async ({ id }) => {
   try {
-    const URL = `${process.env.NEXT_PUBLIC_API_URL}/icStkmast/${item_cd}`
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/icStkmast/${id}`
     const response = await axios.get(URL)
 
     return response.data
@@ -86,9 +85,9 @@ export const getProductById = createAsyncThunk('products/getProductById', async 
 
 export const editProductImageUrl = createAsyncThunk(
   'products/editProductImageUrl',
-  async ({ item_cd, product }, thunkAPI) => {
+  async ({ id, product }, thunkAPI) => {
     try {
-      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/icStkmast/${item_cd}`, product)
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/icStkmast/${id}`, product)
 
       return response.data
     } catch (error) {
@@ -179,8 +178,8 @@ const ProductSlice = createSlice({
       state.loading = false
       state.error = null
       state.oneProduct = action.payload
-      state.item_cd = action.payload[0]?.item_cd
-      state.item_descs = action.payload[0]?.item_descs
+      state.id = action.payload[0]?.id
+      state.name = action.payload[0]?.name
       state.catalog_no = action.payload[0]?.catalog_no
       state.uom_cd = action.payload[0]?.uom_cd
       state.data = action.payload

@@ -22,7 +22,7 @@ export async function GET(NextRequest) {
     filters.group_descs = searchCategory
   }
 
-  const products = await prisma.icStkmast.findMany({
+  const products = await prisma.products.findMany({
     where: {
       ...filters
     }

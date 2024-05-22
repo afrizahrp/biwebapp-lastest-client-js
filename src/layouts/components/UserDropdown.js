@@ -42,13 +42,13 @@ const UserDropdown = props => {
   const session = useSession()
   const router = useRouter()
 
-  const uName = session.data.user.username
+  const name = session.data.user.name
 
   const avatar = session.data.user.avatar
 
-  // const uName = 'john'
-  const firstChar = uName.charAt(0).toUpperCase()
-  const userName = firstChar + uName.slice(1)
+  // const name = 'john'
+  const firstChar = name.charAt(0).toUpperCase()
+  const username = firstChar + name.slice(1)
 
   const uRole = session.data.user.role
   const firstCharRole = uRole.charAt(0).toUpperCase()
@@ -134,7 +134,7 @@ const UserDropdown = props => {
               <Avatar alt='John Doe' src={avatar} sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', ml: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>{userName}</Typography>
+              <Typography sx={{ fontWeight: 600 }}>{username}</Typography>
               <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
                 {userRole}
               </Typography>

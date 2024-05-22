@@ -28,6 +28,7 @@ const initialState = {
 export const getTaskById = createAsyncThunk('planDetail/getTaskById', async ({ id }, { rejectWithValue }) => {
   try {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pdPlanActivityDt/byId/${id}`)
+
     return response.data
   } catch (error) {
     return rejectWithValue(error.response.data)
@@ -41,6 +42,7 @@ export const getTaskBySpkAndItemCd = createAsyncThunk(
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/pdplanactivitydt/bySpkIdAndItemCd/${spk_id}/${item_cd}`
       )
+
       return response.data
     } catch (error) {
       return rejectWithValue(error.response.data)
@@ -54,9 +56,11 @@ export const updatePlanDetail = createAsyncThunk(
   async ({ id, productionPlanDt }, thunkAPI) => {
     try {
       const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/pdplanactivitydt/${id}`, productionPlanDt)
+
       return response.data
     } catch (error) {
       console.error(error, thunkAPI)
+
       return thunkAPI.rejectWithValue(error.response.data)
     }
   }
@@ -123,4 +127,5 @@ const planDetailSlice = createSlice({
 })
 
 export const { handleChange, setEditPlanDt, getUnassignedTasks } = planDetailSlice.actions
+
 export default planDetailSlice.reducer

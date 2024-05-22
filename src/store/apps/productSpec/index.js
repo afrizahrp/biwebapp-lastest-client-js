@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-hot-toast'
+
 const initialState = {
   data: [],
   oneProductSpec: [],
@@ -14,31 +15,32 @@ const initialState = {
 
 export const getAllProductSpec = createAsyncThunk('productSpecs/getAllProductSpec', async () => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/icStkmastSpec/`)
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ProductSpecs/`)
+
     return response.data
   } catch (error) {
     console.error(error)
+
     return null
   }
 })
 
-export const getProductSpec = createAsyncThunk(
-  'productSpecs/getProductSpec',
-  async ({ item_cd }, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/icStkmastSpec/${item_cd}`)
-      return response.data
-    } catch (error) {
-      return rejectWithValue(error.response.data)
-    }
+export const getProductSpec = createAsyncThunk('productSpecs/getProductSpec', async ({ id }, { rejectWithValue }) => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ProductSpecs/${id}`)
+
+    return response.data
+  } catch (error) {
+    return rejectWithValue(error.response.data)
   }
-)
+})
 
 export const editProductSpec = createAsyncThunk(
   'productSpecs/editProductSpec',
-  async ({ item_cd, productSpec }, { rejectWithValue }) => {
+  async ({ id, productSpec }, { rejectWithValue }) => {
     try {
-      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/icStkmastSpec/${item_cd}`, productSpec)
+      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/ProductSpecs/${id}`, productSpec)
+
       return response.data
     } catch (error) {
       return rejectWithValue(error.response.data)
@@ -46,10 +48,10 @@ export const editProductSpec = createAsyncThunk(
   }
 )
 
-// async ({ item_cd, productImageUrl }, { rejectWithValue }) => {
+// async ({ id, productImageUrl }, { rejectWithValue }) => {
 //   try {
 //     const response = await axios.patch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/icStkmastImgUrl/${item_cd}`,
+//       `${process.env.NEXT_PUBLIC_API_URL}/icStkmastImgUrl/${id}`,
 //       productImageUrl
 //     )
 //     return response.data
@@ -120,6 +122,7 @@ const productSpecSlice = createSlice({
     })
   }
 })
+
 export const { setProductSpecData, setEhandleChange, setEditProductSpec } = productSpecSlice.actions
 
 export default productSpecSlice.reducer

@@ -9,5 +9,6 @@ export async function GET(request: NextRequest, { params }: { params: { item_cd:
       item_cd: params.item_cd
     }
   })
+
   return NextResponse.json(products)
 }
