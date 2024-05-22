@@ -11,63 +11,265 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model sysUser {
-  user_id      String   @db.Char(10)
-  role         String   @db.VarChar(10)
-  username     String   @id @unique @db.VarChar(50)
-  email        String   @db.VarChar(50)
-  password     String
-  refreshToken String?  @db.VarChar(250)
-  isLoggedIn   Boolean? @default(false)
-  avatar       String?  @db.VarChar(150)
-}
-
+// common system definition section start
 model User {
-  id            String    @id @default(cuid())
-  username      String   @unique
-  role          String?   @default("user")
-  password      String
-  accessToken   String?
-  refreshToken  String?
-  email         String?
-  emailVerified DateTime?
-  isLoggedIn    Boolean?  @default(false)
-  avatar        String?
-}
-model icStkGroup {
-  group_id    Int     @id @default(autoincrement())
-  group_descs String  @db.VarChar(100)
-  icon        String? @db.VarChar(50)
-  href        String? @db.VarChar(150)
-  isShow      Boolean @default(true)
+  id             String    @id @default(cuid())
+  name           String    @unique
+  role           String?   @default("client")
+  password       String    @db.VarChar(250)
+  hasehdPassword String?   @db.VarChar(250)
+  accessToken    String?   @db.VarChar(250)
+  refreshToken   String?   @db.VarChar(250)
+  email          String?   @db.VarChar(50)
+  emailVerified  DateTime?
+  isLoggedIn     Boolean?  @default(false)
+  avatar         String?   @db.VarChar(150)
+  image          String?   @db.VarChar(150)
+  company        String    @db.Char(5)
+  branch         String    @db.Char(10)
 }
 
-model icStkmast {
-  group_id      Int      @default(0) @db.Int
-  group_cd      String?  @db.Char(10)
-  group_descs   String?  @db.VarChar(30)
-  item_cd       String   @id @db.VarChar(20)
-  item_descs    String   @default("") @db.VarChar(250)
-  kbki_cd       String?  @default("") @db.VarChar(50)
-  catalog_no    String?  @db.VarChar(20)
-  brand_name    String?  @default("") @db.VarChar(100)
-  uom_cd        String?  @default("") @db.VarChar(10)
-  isShowed      Boolean  @default(true)
-  remarks       String?  @default("") @db.VarChar(100)
-  ecatalog_url  String?  @default("") @db.VarChar(150)
-  seo_title     String?  @default("") @db.VarChar(250)
-  sni_cd        String?  @default("") @db.VarChar(50)
-  selling_price Decimal? @default(0) @db.Decimal(9, 0)
-  isMaterial    Boolean  @default(false)
-  imgUrl1       String?  @default("") @db.VarChar(250)
-  imgUrl2       String?  @default("") @db.VarChar(250)
-  imgUrl3       String?  @default("") @db.VarChar(250)
-  imgUrl4       String?  @default("") @db.VarChar(250)
-  videoUrl      String?  @default("") @db.VarChar(250)
+model MasterTableStatus {
+  id         Boolean      @id @default(false)
+  name       String?      @db.VarChar(50)
+  remarks    String?      @db.VarChar(150)
+  createdBy  String?      @db.VarChar(50)
+  createdAt  DateTime?    @db.DateTime
+  updatedBy  String?      @db.VarChar(50)
+  updatedAt  DateTime?    @db.DateTime
+  company    String       @db.Char(5)
+  branch     String       @db.Char(10)
+  Categories Categories[]
+  Products   Products[]
+  Suppliers  Suppliers[]
 }
 
-model icStkmastSpec {
-  item_cd            String    @id @db.VarChar(20)
+model TrxTableStatus {
+  id        Int        @id @db.TinyInt
+  name      String?    @db.VarChar(50)
+  remarks   String?    @db.VarChar(150)
+  createdBy String?    @db.VarChar(50)
+  createdAt DateTime?  @db.DateTime
+  updatedBy String?    @db.VarChar(50)
+  updatedAt DateTime?  @db.DateTime
+  company   String     @db.Char(5)
+  branch    String     @db.Char(10)
+  poHeader  PoHeader[]
+}
+
+model TermOfPay {
+  id        String    @id @default(cuid())
+  name      String?   @db.VarChar(150)
+  createdBy String?   @db.VarChar(50)
+  createdAt DateTime? @db.DateTime
+  updatedBy String?   @db.VarChar(50)
+  updatedAt DateTime? @db.DateTime
+  company   String    @db.Char(5)
+  branch    String    @db.Char(10)
+}
+
+model Currency {
+  id            String         @id @db.Char(3)
+  name          String?        @db.VarChar(150)
+  createdBy     String?        @db.VarChar(50)
+  createdAt     DateTime?      @db.DateTime
+  updatedBy     String?        @db.VarChar(50)
+  updatedAt     DateTime?      @db.DateTime
+  company       String         @db.Char(5)
+  branch        String         @db.Char(10)
+  currencyRates CurrencyRate[] // Add this line
+}
+
+model CurrencyRate {
+  id         String    @id @default(cuid())
+  kursDate   DateTime? @db.Date
+  currencyId String    @db.Char(3)
+  rate       Decimal   @db.Decimal(9, 4)
+  createdBy  String?   @db.VarChar(50)
+  createdAt  DateTime? @db.DateTime
+  updatedBy  String?   @db.VarChar(50)
+  updatedAt  DateTime? @db.DateTime
+  company    String    @db.Char(5)
+  branch     String    @db.Char(10)
+  currency   Currency  @relation(fields: [currencyId], references: [id]) // Add this line
+}
+
+// common system definition section end
+
+// Id Generator and Identification definition section start
+model SysCounter {
+  company_id   String   @db.Char(5)
+  branch_id    String   @db.Char(10)
+  module_id    String   @db.Char(3)
+  counter_id   String   @db.Char(3)
+  lastCounter  Int
+  description  String   @db.VarChar(160)
+  pattern      String   @db.Char(30)
+  combiner     String   @db.Char(20)
+  refreshAt    String   @db.Char(1)
+  firstChar    String   @db.Char(4)
+  secondChar   String   @db.Char(4)
+  digits       Int
+  startYear    String   @db.Char(4)
+  startMonth   String   @db.Char(2)
+  startCount   Int
+  recounter    Int
+  autoGenerate Boolean  @default(false)
+  createdBy    String   @db.Char(10)
+  createdAt    DateTime
+  updatedBy    String   @db.Char(10)
+  updatedAt    DateTime
+
+  @@id([module_id, counter_id, startYear, startMonth, company_id, branch_id])
+}
+
+model SysDocId {
+  module_id  String   @db.Char(3)
+  prefix_id  String   @db.Char(3)
+  doc_id     String   @id @db.Char(20)
+  remarks    String?  @db.VarChar(250)
+  createdBy  String   @db.Char(10)
+  createdAt  DateTime
+  company_id String   @db.Char(5)
+  branch_id  String   @db.Char(10)
+}
+
+// Id Generator and Identification definition section end
+
+// Inventory Management section start
+model Uoms {
+  id        String     @id @db.Char(10)
+  name      String?    @db.VarChar(150)
+  iStatus   Int?       @default(0) @db.TinyInt
+  remarks   String?    @db.VarChar(250)
+  createdBy String?    @db.VarChar(50)
+  createdAt DateTime?  @db.DateTime
+  updatedBy String?    @db.VarChar(50)
+  updatedAt DateTime?  @db.DateTime
+  company   String     @db.Char(5)
+  branch    String     @db.Char(10)
+  products  Products[]
+  poDetail  PoDetail[]
+}
+
+model CategoryTypes {
+  id         String       @id @db.Char(1)
+  name       String?      @db.VarChar(20)
+  iStatus    Int?         @default(0) @db.TinyInt
+  remarks    String?      @db.VarChar(250)
+  createdBy  String?      @db.VarChar(10)
+  createdAt  DateTime?    @db.DateTime
+  updatedBy  String?      @db.VarChar(10)
+  updatedAt  DateTime?    @db.DateTime
+  company    String       @db.Char(5)
+  branch     String       @db.Char(10)
+  categories Categories[]
+}
+
+model Categories {
+  type          String             @db.Char(1)
+  categoryType  CategoryTypes      @relation(fields: [type], references: [id])
+  id            String             @id @db.Char(10)
+  name          String?            @db.VarChar(50)
+  href          String?            @db.VarChar(150)
+  slug          String?            @db.VarChar(50)
+  icon          String?            @db.VarChar(50)
+  imageURL      String?            @db.VarChar(250)
+  iStatus       Boolean            @default(false)
+  status        MasterTableStatus? @relation(fields: [iStatus], references: [id])
+  remarks       String?            @db.VarChar(250)
+  iShowedStatus Boolean?           @default(true)
+  createdBy     String?            @db.VarChar(50)
+  createdAt     DateTime?          @db.DateTime
+  updatedBy     String?            @db.VarChar(50)
+  updatedAt     DateTime?          @db.DateTime
+  company       String             @db.Char(5)
+  branch        String             @db.Char(10)
+  subCategories SubCategories[]
+  products      Products[]
+}
+
+model SubCategories {
+  id          String     @id @db.Char(10)
+  category_id String     @db.Char(10)
+  name        String?    @db.VarChar(150)
+  iStatus     Int?       @default(0) @db.TinyInt
+  remarks     String?    @db.VarChar(250)
+  status      String?    @db.VarChar(15)
+  createdBy   String?    @db.VarChar(50)
+  createdAt   DateTime?  @db.DateTime
+  updatedBy   String?    @db.VarChar(50)
+  updatedAt   DateTime?  @db.DateTime
+  company     String     @db.Char(5)
+  branch      String     @db.Char(10)
+  products    Products[] // @relation(fields: [productId], references: [id])
+  category    Categories @relation(fields: [category_id], references: [id])
+}
+
+model Brands {
+  type      Boolean    @default(false) //false = local, true = import
+  id        String     @id @db.Char(10)
+  name      String?    @db.VarChar(50)
+  iStatus   Int?       @default(0) @db.TinyInt
+  remarks   String?    @db.VarChar(250)
+  createdBy String?    @db.VarChar(50)
+  createdAt DateTime?  @db.DateTime
+  updatedBy String?    @db.VarChar(50)
+  updatedAt DateTime?  @db.DateTime
+  company   String     @db.Char(5)
+  branch    String     @db.Char(10)
+  products  Products[]
+}
+
+model Products {
+  category_id    String             @db.Char(10)
+  subCategory_id String             @db.Char(10)
+  brand_id       String             @db.Char(10)
+  id             String             @id @db.Char(20)
+  catalog_id     String?            @db.VarChar(20)
+  registered_id  String?            @db.VarChar(20)
+  name           String?            @db.VarChar(250)
+  uom_id         String             @db.Char(10)
+  isMaterial     Boolean            @default(false)
+  remarks        String?            @db.VarChar(250)
+  iStatus        Boolean            @default(false)
+  iShowedStatus  Boolean?           @default(true)
+  createdBy      String?            @db.VarChar(50)
+  createdAt      DateTime?          @default(now()) @db.DateTime
+  updatedBy      String?            @db.VarChar(50)
+  updatedAt      DateTime?          @db.DateTime
+  company        String             @db.Char(5)
+  branch         String             @db.Char(10)
+  status         MasterTableStatus? @relation(fields: [iStatus], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  images         ProductImages[]
+  brand          Brands             @relation(fields: [brand_id], references: [id])
+  uom            Uoms               @relation(fields: [uom_id], references: [id])
+  subCategory    SubCategories      @relation(fields: [subCategory_id], references: [id])
+  category       Categories         @relation(fields: [category_id], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  specs   ProductSpecs[]
+  tkdn_pctg      Decimal?           @default(0) @db.Decimal(5, 2)
+  bmp_pctg       Decimal?           @default(0) @db.Decimal(5, 2)
+  ecatalog_URL   String?            @db.VarChar(250)
+  slug           String?            @db.VarChar(250)
+  poDetail       PoDetail[]
+}
+
+model ProductImages {
+  id         String    @id @default(uuid())
+  product_id String    @db.Char(20)
+  imageURL   String?   @db.VarChar(250)
+  isPrimary  Boolean?  @default(false)
+  createdBy  String?   @db.VarChar(50)
+  createdAt  DateTime? @db.DateTime
+  updatedBy  String?   @db.VarChar(50)
+  updatedAt  DateTime? @db.DateTime
+  company    String?   @db.Char(5)
+  branch     String?   @db.Char(10)
+  products   Products? @relation(fields: [product_id], references: [id])
+}
+
+model ProductSpecs {
+  id                 String    @id @db.Char(20)
   catalog_no         String?   @db.VarChar(20)
   itemFunctions      String?   @default("") @db.VarChar(250)
   item_type          String?   @default("") @db.VarChar(100)
@@ -127,31 +329,105 @@ model icStkmastSpec {
   drawer             String?   @default("") @db.VarChar(250)
   systemControl      String?   @default("") @db.VarChar(250)
   bodyFrameWork      String?   @default("") @db.VarChar(250)
-  tkdn_pctg          Decimal?  @default(0) @db.Decimal(5, 2)
-  bmp_pctg           Decimal?  @default(0) @db.Decimal(5, 2)
-  composition_pctg   Decimal?  @default(0) @db.Decimal(9, 2)
-  bmp_value          Decimal?  @default(0) @db.Decimal(9, 2)
-  tkdn_value         Decimal?  @default(0) @db.Decimal(9, 2)
   remarks            String?   @default("") @db.VarChar(1000)
+  createdBy          String?   @db.VarChar(50)
+  createdAt          DateTime? @db.DateTime
+  updatedBy          String?   @db.VarChar(50)
+  updatedAt          DateTime? @db.DateTime
+  company            String    @db.Char(5)
+  branch             String    @db.Char(10)
+  products           Products  @relation(fields: [id], references: [id])
 }
 
-model po_supplier {
-  supplier_cd    String    @id @db.Char(30)
-  name           String?   @db.VarChar(150)
-  address1       String?   @db.VarChar(250)
-  address2       String?   @db.VarChar(250)
-  address3       String?   @db.VarChar(250)
-  post_cd        String?   @db.VarChar(10)
-  tel_no         String?   @db.VarChar(50)
-  fax_no         String?   @db.VarChar(50)
-  email          String?   @db.VarChar(50)
-  contact_person String?   @db.VarChar(50)
-  mobile_no      String?   @db.VarChar(50)
-  credit_term    Int?      @db.TinyInt
-  currency_cd    String?   @db.Char(3)
-  remarks        String?   @db.VarChar(250)
-  createdBy      String?   @db.VarChar(50)
-  createdAt      DateTime? @default(now()) @db.DateTime
-  updatedBy      String?   @db.VarChar(50)
-  updatedAt      DateTime? @default(now()) @db.DateTime
+model sysCarousel {
+  id          Int       @id @default(autoincrement())
+  section     Int       @db.TinyInt
+  title       String?   @db.VarChar(150)
+  description String?   @db.VarChar(250)
+  imageURL    String?   @db.VarChar(250)
+  isShowSlide Boolean?  @default(true)
+  isShowBtn   Boolean?  @default(true)
+  btnText     String?   @db.VarChar(50)
+  createdBy   String?   @db.VarChar(50)
+  createdAt   DateTime? @default(now()) @db.DateTime
+  updatedBy   String?   @db.VarChar(50)
+  updatedAt   DateTime? @default(now()) @db.DateTime
+}
+
+model Suppliers {
+  supplier_type      String?            @db.VarChar(25)
+  href               String?            @db.VarChar(150)
+  id                 String             @id @db.Char(20)
+  supplier_cd        String             @db.Char(30)
+  name               String?            @db.VarChar(150)
+  address            String?            @db.VarChar(250)
+  post_cd            String?            @db.VarChar(10)
+  tel_no             String?            @db.VarChar(50)
+  fax_no             String?            @db.VarChar(50)
+  email              String?            @db.VarChar(50)
+  contact_person     String?            @db.VarChar(50)
+  primary_mobileNo   String?            @db.VarChar(50)
+  secondary_mobileNo String?            @db.VarChar(50)
+  credit_term        Int?               @db.TinyInt
+  currency_cd        String?            @db.Char(3)
+  remarks            String?            @db.VarChar(250)
+  iStatus            Boolean?           @default(true)
+  createdBy          String?            @db.VarChar(50)
+  createdAt          DateTime?          @db.DateTime
+  updatedBy          String?            @db.VarChar(50)
+  updatedAt          DateTime?          @db.DateTime
+  company            String             @db.Char(5)
+  branch             String             @db.Char(10)
+  status             MasterTableStatus? @relation(fields: [iStatus], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  poHeader           PoHeader[]
+}
+
+model PoHeader {
+  id           String          @id @db.Char(20)
+  ref_no       String?         @db.VarChar(20)
+  supplier_id  String          @db.Char(20)
+  currency_cd  String?         @db.Char(3)
+  tax_cd       String?         @db.Char(3)
+  tax_rate     Decimal?        @db.Decimal(5, 2)
+  po_date      DateTime?       @db.DateTime
+  credit_terms Int?            @db.TinyInt
+  base_amt     Decimal?        @db.Decimal(18, 2)
+  disc_amt     Decimal?        @db.Decimal(18, 2)
+  tax_amt      Decimal?        @db.Decimal(18, 2)
+  trx_amt      Decimal?        @db.Decimal(18, 2)
+  remarks      String?         @db.VarChar(250)
+  iStatus      Int?            @default(0) @db.TinyInt // 0 = Entry, 1 = Posted, 2 = Rejected, 3= received , 4 = closed, 5 = cancelled
+  createdBy    String?         @db.VarChar(50)
+  createdAt    DateTime?       @db.DateTime
+  updatedBy    String?         @db.VarChar(50)
+  updatedAt    DateTime?       @db.DateTime
+  company      String          @db.Char(5)
+  branch       String          @db.Char(10)
+  suppliers    Suppliers       @relation(fields: [supplier_id], references: [id])
+  status       TrxTableStatus? @relation(fields: [iStatus], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  poDetail     PoDetail[]
+}
+
+model PoDetail {
+  id         String    @id @db.Char(20)
+  po_id      String    @db.Char(20)
+  product_id String    @db.Char(20)
+  qty        Decimal?  @default(0) @db.Decimal(18, 2)
+  uom_id     String    @db.Char(10)
+  unit_price Decimal?  @default(0) @db.Decimal(18, 2)
+  disc_pctg  Decimal?  @default(0) @db.Decimal(5, 2)
+  disc_amt   Decimal?  @db.Decimal(18, 2)
+  tax_pctg   Decimal?  @default(0) @db.Decimal(5, 2)
+  tax_amt    Decimal?  @default(0) @db.Decimal(18, 2)
+  trx_amt    Decimal?  @default(0) @db.Decimal(18, 2)
+  remarks    String?   @db.VarChar(250)
+  createdBy  String?   @db.VarChar(50)
+  createdAt  DateTime? @db.DateTime
+  updatedBy  String?   @db.VarChar(50)
+  updatedAt  DateTime? @db.DateTime
+  company    String    @db.Char(5)
+  branch     String    @db.Char(10)
+  poHeader   PoHeader  @relation(fields: [po_id], references: [id])
+  products   Products  @relation(fields: [product_id], references: [id])
+  uom        Uoms      @relation(fields: [uom_id], references: [id], onUpdate: NoAction, onDelete: NoAction)
 }

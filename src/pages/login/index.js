@@ -43,13 +43,13 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }))
 
 const schema = yup.object().shape({
-  username: yup.string().required(),
+  name: yup.string().required(),
   password: yup.string().min(5).required()
 })
 
 const defaultValues = {
   password: '1234567',
-  username: 'afriza'
+  name: 'afriza'
 }
 
 const LoginPage = () => {
@@ -78,17 +78,17 @@ const LoginPage = () => {
   })
 
   const onSubmit = data => {
-    const { username, password } = data
-    signIn('credentials', { username, password, redirect: false }).then(res => {
+    const { name, password } = data
+    signIn('credentials', { name, password, redirect: false }).then(res => {
       if (res && res.ok) {
         const returnUrl = router.query.returnUrl
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
 
         router.replace(redirectURL)
       } else {
-        setError('username', {
+        setError('name', {
           type: 'manual',
-          message: 'username or Password is invalid'
+          message: 'name or Password is invalid'
         })
       }
     })
@@ -136,7 +136,7 @@ const LoginPage = () => {
             <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
               <FormControl fullWidth sx={{ mb: 4 }}>
                 <Controller
-                  name='username'
+                  name='name'
                   control={control}
                   rules={{ required: true }}
                   render={({ field: { value, onChange, onBlur } }) => (
@@ -146,16 +146,14 @@ const LoginPage = () => {
                       value={value}
                       onBlur={onBlur}
                       onChange={onChange}
-                      error={Boolean(errors.username)}
+                      error={Boolean(errors.name)}
                       placeholder='Your name'
 
                       // inputProps={{ min: 0, style: { textAlign: 'center' } }}
                     />
                   )}
                 />
-                {errors.username && (
-                  <FormHelperText sx={{ color: 'error.username' }}>{errors.username.message}</FormHelperText>
-                )}
+                {errors.name && <FormHelperText sx={{ color: 'error.name' }}>{errors.name.message}</FormHelperText>}
               </FormControl>
               <FormControl fullWidth>
                 <InputLabel htmlFor='auth-login-v2-password' error={Boolean(errors.password)}>

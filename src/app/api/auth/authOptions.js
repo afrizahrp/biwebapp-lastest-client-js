@@ -9,10 +9,10 @@ export const authOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: {
-          label: 'Username',
-          type: 'username',
-          placeholder: 'username'
+        name: {
+          label: 'name',
+          type: 'text',
+          placeholder: 'name'
         },
         password: {
           label: 'Password',
@@ -21,10 +21,10 @@ export const authOptions = {
         }
       },
       async authorize(credentials) {
-        if (!credentials?.username || !credentials.password) return null
+        if (!credentials?.name || !credentials.password) return null
 
         const user = await prisma.user.findUnique({
-          where: { username: credentials.username }
+          where: { name: credentials.name }
         })
 
         if (!user) return null
@@ -33,7 +33,7 @@ export const authOptions = {
 
         if (passwordsMatch) {
           await prisma.user.update({
-            where: { username: credentials.username },
+            where: { name: credentials.name },
             data: {
               isLoggedIn: true
             }
@@ -58,7 +58,7 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role
-        token.username = user.username
+        token.name = user.name
         token.isLoggedIn = user.isLoggedIn
         token.avatar = user.avatar
       }
@@ -70,7 +70,7 @@ export const authOptions = {
     async session({ session, token }) {
       if (session?.user) {
         session.user.role = token.role
-        session.user.username = String(token.username)
+        session.user.name = String(token.name)
         session.user.isLoggedIn = token.isLoggedIn
         session.user.avatar = token.avatar
       }

@@ -9,7 +9,7 @@ const extendSession = session => {
       ...session.user,
       id: '', // Add your custom 'id'
       role: '', // Add your custom 'role'
-      username: '', // Add your custom 'username'
+      name: '', // Add your custom 'name'
       avatar: '' // Add your custom 'avatar'
     }
   }
@@ -20,7 +20,7 @@ const extendUser = user => {
   return {
     ...user,
     role: '', // Add your custom 'role'
-    username: '', // Add your custom 'username'
+    name: '', // Add your custom 'name'
     avatar: '' // Add your custom 'avatar'
   }
 }
